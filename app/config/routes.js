@@ -1,10 +1,12 @@
 const LoginController = require('../controllers/LoginController');
 const UserController = require('../controllers/UserController');
+const WeatherController = require('../controllers/WeatherController');
 
 const Token = require('../helpers/Token');
 
 const loginController = new LoginController();
 const userController = new UserController();
+const weatherController = new WeatherController();
 
 module.exports = (app) => {
 
@@ -39,5 +41,10 @@ module.exports = (app) => {
     /* END - Rotas de Cadastro de Usuário */
 
     /*################################################################*/
+
+    const weatherRoutes = weatherController.routes();
+
+    app.route(weatherRoutes.clima)
+        .get(/*Token.verifyJWT,*/ weatherController.clima());
 
 };

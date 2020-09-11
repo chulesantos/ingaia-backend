@@ -46,7 +46,7 @@ class UserController {
 
                 if (usuario) {
 
-                    resp.json(
+                    resp.json(404,
                         {
                             msg: 'Login já cadastrado!'
                         });
@@ -67,7 +67,7 @@ class UserController {
 
                         } else {
 
-                            resp.json(
+                            resp.json(200,
                                 {
                                     msg: 'Usuario Cadastrado com Sucesso!'
                                 });

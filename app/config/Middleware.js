@@ -29,6 +29,11 @@ class Middleware {
         const crypto = require('crypto');
         return crypto;
     }
+
+    static request() {
+        const request = require('request');
+        return request;
+    }
 }
 
 module.exports = Middleware;

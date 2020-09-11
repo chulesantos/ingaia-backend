@@ -9,5 +9,10 @@
   "crypto": {
     "algorithm": "aes-256-cbc",
     "mysecret": "MyQueenLivesInMimosoDoSul"
+  },
+  "openweather": {
+    "uri": "http://api.openweathermap.org/data/2.5/weather?q",
+    "api_key": "95ab54bbd57c53f42c1f2ccae0fcfbd9",
+    "units": "metric"
   }
 }
