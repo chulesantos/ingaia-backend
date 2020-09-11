@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+  ingaia-backend:
+    driver:
+      bridge
+
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongo-teste
+    networks:
+      - ingaia-backend
+
+  node:
+    build:
+      dockerfile: ./node.dockerfile
+      context: .
+    image: chulesantos/node-teste
+    container_name: node-teste
+    ports:
+      - "3000"
+    networks:
+      - ingaia-backend
+    depends_on:
+      - "mongodb"

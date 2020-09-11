@@ -1,0 +1,13 @@
+{
+  "mongodb": {
+    "development": "mongodb://mongodb:27017/development"
+  },
+  "jwt": {
+    "expiresIn": 480,
+    "algorithm": "RS256"
+  },
+  "crypto": {
+    "algorithm": "aes-256-cbc",
+    "mysecret": "MyQueenLivesInMimosoDoSul"
+  }
+}
