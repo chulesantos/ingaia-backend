@@ -14,5 +14,9 @@
     "uri": "http://api.openweathermap.org/data/2.5/weather?q",
     "api_key": "95ab54bbd57c53f42c1f2ccae0fcfbd9",
     "units": "metric"
+  },
+  "apispotify": {
+    "client_id": "cde0e58bea6048ec8690caac1941ef64",
+    "client_secret": "98aea884fa884a378751b1864507998c"
   }
 }

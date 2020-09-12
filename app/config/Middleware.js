@@ -34,6 +34,11 @@ class Middleware {
         const request = require('request');
         return request;
     }
+
+    static spotifyWebApi() {
+        const spotifyWebApi = require('spotify-web-api-node');
+        return spotifyWebApi;
+    }
 }
 
 module.exports = Middleware;
