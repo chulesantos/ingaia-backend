@@ -21,9 +21,6 @@ module.exports = (app) => {
     app.route(loginRoutes.login)
         .post(loginController.login());
 
-    app.route(loginRoutes.renewtoken)
-        .post(Token.renewJWT, loginController.renewToken());
-
     /* END - Rotas de Login e Autenticação */
 
     /*################################################################*/

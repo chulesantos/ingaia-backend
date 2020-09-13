@@ -29,7 +29,7 @@ class WeatherController {
 
                 if (statusCode !== 200) {
 
-                    resp.json(statusCode,
+                    resp.status(statusCode).json(
                         {
                             city: city,
                             msg: 'Cidade não localizada!'
@@ -42,7 +42,7 @@ class WeatherController {
 
                 let temp = Math.round(parse['main']['temp']);
 
-                resp.json(statusCode,
+                resp.status(statusCode).json(
                     {
                         city: city,
                         temp: temp,

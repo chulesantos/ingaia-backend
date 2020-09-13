@@ -1,17 +1,13 @@
-const Middleware = require('../config/Middleware');
+const Database = require('../config/Database');
 const Crypto = require('../helpers/Crypto');
-const config = require('../config/settings');
 const User = require('../models/User');
 
-class UserController {
+class UserController extends Database {
 
     constructor() {
 
-        const mongoose = Middleware.mongoose();
+        super();
 
-        mongoose.Promise = global.Promise;
-
-        mongoose.connect(config.mongodb.development, {useNewUrlParser: true});
     }
 
     routes() {
@@ -26,12 +22,11 @@ class UserController {
         return function (error, resp) {
 
             User.find(function (error, usuarios) {
-                if (error) {
+                if (error)
                     resp.send(error);
 
-                } else {
-                    resp.json(usuarios);
-                }
+                resp.json(usuarios);
+
             });
         }
     }
@@ -46,7 +41,7 @@ class UserController {
 
                 if (usuario) {
 
-                    resp.json(404,
+                    resp.status(401).json(
                         {
                             msg: 'Login já cadastrado!'
                         });
@@ -67,7 +62,7 @@ class UserController {
 
                         } else {
 
-                            resp.json(200,
+                            resp.status(200).json(
                                 {
                                     msg: 'Usuario Cadastrado com Sucesso!'
                                 });

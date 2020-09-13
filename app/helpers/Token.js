@@ -24,7 +24,7 @@ class Token {
         const token = req.headers['authorization'];
 
         if (!token) {
-            return resp.status(401).send(
+            return resp.status(401).json(
                 {
                     auth: false,
                     message: 'Token não informado.'
@@ -34,7 +34,7 @@ class Token {
         jwt.verify(token, publicKey, {algorithm: [config.jwt.algorithm]}, function (err, decoded) {
 
             if (err) {
-                return resp.status(401).send(
+                return resp.status(401).json(
                     {
                         auth: false,
                         message: 'Token inválido.'
@@ -51,7 +51,7 @@ class Token {
         const oldToken = req.body.token;
 
         if (!oldToken) {
-            return resp.status(401).send(
+            return resp.status(401).json(
                 {
                     auth: false,
                     message: 'Token não informado.'
@@ -61,7 +61,7 @@ class Token {
         jwt.verify(oldToken, publicKey, {algorithm: [config.jwt.algorithm]}, function (err, decoded) {
 
             if (err) {
-                return resp.status(401).send(
+                return resp.status(401).json(
                     {
                         auth: false,
                         message: 'Token inválido.'
@@ -72,7 +72,7 @@ class Token {
 
             const newToken = Token.generateJWT(decoded.id);
 
-            resp.json(
+            resp.status(200).json(
                 {
                     auth: true,
                     token: newToken,

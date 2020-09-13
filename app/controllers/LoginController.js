@@ -1,24 +1,21 @@
+const Database = require('../config/Database');
 const Middleware = require('../config/Middleware');
 const Token = require('../helpers/Token');
 const Crypto = require('../helpers/Crypto');
-const config = require('../config/settings');
+
 const User = require('../models/User');
 
-class LoginController {
+class LoginController extends Database {
 
     constructor() {
 
-        const mongoose = Middleware.mongoose();
+        super();
 
-        mongoose.Promise = global.Promise;
-
-        mongoose.connect(config.mongodb.development, {useNewUrlParser: true});
     }
 
     routes() {
         return {
-            login: '/login',
-            renewtoken: '/login/renewtoken'
+            login: '/login'
         };
     }
 
@@ -40,7 +37,7 @@ class LoginController {
 
                         const token = Token.generateJWT(id);
 
-                        resp.json(
+                        resp.status(200).json(
                             {
                                 auth: true,
                                 token: token,
@@ -49,7 +46,7 @@ class LoginController {
 
                     } else {
 
-                        resp.json(
+                        resp.status(401).json(
                             {
                                 auth: false,
                                 token: null,
@@ -57,11 +54,6 @@ class LoginController {
                             });
                     }
                 });
-        }
-    }
-
-    renewToken() {
-        return function (error, resp) {
         }
     }
 }
