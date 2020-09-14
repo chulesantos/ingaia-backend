@@ -27,63 +27,70 @@ class PlaylistController {
 
         //pop, rock, classical
 
-        return spotifyApi.clientCredentialsGrant()
+        spotifyApi.clientCredentialsGrant()
             .then(result => {
-                /* result.body['expires_in']);
-                 result.body['access_token']);*/
+                return result
+            })
+            .then(result => {
 
                 const token = result.body['access_token'];
 
                 spotifyApi.setAccessToken(token);
 
-                let index = Math.floor(Math.random() * 10);
+                return spotifyApi;
+            })
+            .then(async result => {
 
-                spotifyApi.getPlaylistsForCategory('classical', {
+                const getPlaylist = await spotifyApi.getPlaylistsForCategory('classical', {
                     country: 'BR',
                     limit: 10,
                     offset: 0
-                }).catch(error => error)
-                    .then(result => {
+                })
 
-                        const spotify = result.body;
-
-                        let playlist_id = spotify.playlists.items[index].id;
-
-                        const dataPlaylist =
-                            {
-                                id: playlist_id,
-                                playlist: spotify.playlists.items[index].name,
-                                desc: spotify.playlists.items[index].description
-                            }
-
-                        return dataPlaylist;
-
-                    }).catch(error => error)
-                    .then(resultPlaylist => {
-
-                        spotifyApi.getPlaylistTracks(resultPlaylist.id, {
-                            fields: 'items'
-                        }).catch(error => error)
-                            .then(async result => {
-
-                                const tracks = result.body.items;
-
-                                const musicas = [];
-
-                                Object.keys(tracks).map(objectKey => {
-
-                                    musicas.push(tracks[objectKey].track.name);
-
-                                })
-
-                                return resultPlaylist.tracks = musicas;
-
-                            }).catch(error => error).then(result => {
-
-
-                        })
-                    })
+                return getPlaylist;
             })
+            .then(result => {
+
+                let index = Math.floor(Math.random() * 10);
+
+                const spotify = result.body;
+
+                let playlist_id = spotify.playlists.items[index].id;
+
+                const dataPlaylist =
+                    {
+                        id: playlist_id,
+                        playlist: spotify.playlists.items[index].name,
+                        desc: spotify.playlists.items[index].description
+                    }
+
+                return dataPlaylist;
+
+            })
+            .then(async resultPlaylist => {
+
+                const getPlaylistTracks = await spotifyApi.getPlaylistTracks(resultPlaylist.id, {
+                    fields: 'items'
+                })
+
+                const tracksPlaylist = [];
+
+                const tracks = getPlaylistTracks.body.items;
+
+                Object.keys(tracks).map(objectKey => {
+
+                    tracksPlaylist.push(tracks[objectKey].track.name);
+
+                })
+
+                resultPlaylist.tracks = tracksPlaylist;
+
+                console.log(resultPlaylist);
+
+                return resultPlaylist;
+
+            })
+            .catch(error => error)
 
     }
 }
