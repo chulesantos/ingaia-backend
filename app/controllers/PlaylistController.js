@@ -3,123 +3,88 @@ const config = require('../config/settings');
 
 class PlaylistController {
 
-    constructor() {
-
-    }
-
     routes() {
         return {
             playlist: '/playlist'
         };
     }
 
-    playlist() {
+    static spotifyApi() {
 
-        return function (req, resp) {
+        const spotifyWebApi = Middleware.spotifyWebApi();
 
-            const spotifyWebApi = Middleware.spotifyWebApi();
+        const spotifyApi = new spotifyWebApi({
+            clientId: config.apispotify.client_id,
+            clientSecret: config.apispotify.client_secret
+        });
 
-            const spotifyApi = new spotifyWebApi({
-                clientId: config.apispotify.client_id,
-                clientSecret: config.apispotify.client_secret
-            });
+        return spotifyApi;
+    }
 
-            //pop, rock, classical
+    async playlist() {
 
-            // Retrieve an access token
-            spotifyApi.clientCredentialsGrant().then(
-                function (data) {
-                    //  console.log('The access token expires in ' + data.body['expires_in']);
-                    //   console.log('The access token is ' + data.body['access_token']);
+        const spotifyApi = PlaylistController.spotifyApi();
 
-                    // Save the access token so that it's used in future calls
-                    spotifyApi.setAccessToken(data.body['access_token']);
+        //pop, rock, classical
 
-                    const token = data.body['access_token'];
+        return spotifyApi.clientCredentialsGrant()
+            .then(result => {
+                /* result.body['expires_in']);
+                 result.body['access_token']);*/
 
-                    //    console.log(token);
+                const token = result.body['access_token'];
 
-                    spotifyApi.setAccessToken(token);
+                spotifyApi.setAccessToken(token);
 
-                    /*     // Get Elvis' albums
-                         spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-                             function(data) {
-                                 console.log('Artist albums', data.body);
-                             },
-                             function(err) {
-                                 console.error(err);
-                             }
-                         );*/
+                let index = Math.floor(Math.random() * 10);
 
-                   spotifyApi.getPlaylistTracks('37i9dQZF1DWXZo3QlWdchi', {
-                        offset: 1,
-                        limit: 5,
-                        fields: 'items'
-                    })
-                        .then(
-                            function (data) {
-                                console.log(JSON.stringify(data.body));
-                            },
-                            function (err) {
-                                console.log('Something went wrong!', err);
-                            }
-                        );
+                spotifyApi.getPlaylistsForCategory('classical', {
+                    country: 'BR',
+                    limit: 10,
+                    offset: 0
+                }).catch(error => error)
+                    .then(result => {
 
+                        const spotify = result.body;
 
-                    let index = Math.floor(Math.random() * 10);
-                    // Get Playlists for a Category (Party in Brazil)
-                    spotifyApi.getPlaylistsForCategory('rock', {
-                        country: 'BR',
-                        limit: 10,
-                        offset: 0
-                    })
-                        .then(function (data) {
+                        let playlist_id = spotify.playlists.items[index].id;
 
-                            const spotify = data.body;
-
-                            let playlist_id = spotify.playlists.items[index].id;
-
-                            const playlist = {
+                        const dataPlaylist =
+                            {
                                 id: playlist_id,
-                                name: spotify.playlists.items[index].name,
+                                playlist: spotify.playlists.items[index].name,
                                 desc: spotify.playlists.items[index].description
-
                             }
 
-                         //   console.log(playlist);
+                        return dataPlaylist;
 
-                        }, function (err) {
-                            console.log("Something went wrong!", err);
-                        });
+                    }).catch(error => error)
+                    .then(resultPlaylist => {
+
+                        spotifyApi.getPlaylistTracks(resultPlaylist.id, {
+                            fields: 'items'
+                        }).catch(error => error)
+                            .then(async result => {
+
+                                const tracks = result.body.items;
+
+                                const musicas = [];
+
+                                Object.keys(tracks).map(objectKey => {
+
+                                    musicas.push(tracks[objectKey].track.name);
+
+                                })
+
+                                return resultPlaylist.tracks = musicas;
+
+                            }).catch(error => error).then(result => {
 
 
-// Get tracks in a playlist
+                        })
+                    })
+            })
 
-
-                },
-                function (err) {
-                    /*   console.log(
-                           'Something went wrong when retrieving an access token',
-                           err.message
-                       );*/
-                }
-            );
-
-            // console.log(token);
-
-
-            /*spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-                function(data) {
-                    console.log('Artist albums', data.body);
-                },
-                function(err) {
-                    console.error(err);
-                }
-            );*/
-
-            // resp.send('Testando a rota')
-
-        }
     }
 }
 

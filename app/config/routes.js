@@ -51,6 +51,12 @@ module.exports = (app) => {
     const playlistRoutes = playlistController.routes();
 
     app.route(playlistRoutes.playlist)
-        .get(/*Token.verifyJWT,*/ playlistController.playlist());
+        .get(/*Token.verifyJWT,*/ async (req, resp) => {
+
+            let data = await playlistController.playlist();
+
+            resp.json(data);
+
+        });
 
 };
