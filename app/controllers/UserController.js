@@ -19,13 +19,13 @@ class UserController extends Database {
 
     listar() {
 
-        return function (error, resp) {
+        return (error, resp) => {
 
-            User.find(function (error, usuarios) {
+            User.find((error, usuarios) => {
                 if (error)
-                    resp.send(error);
+                    resp.status(500).json(error);
 
-                resp.json(usuarios);
+                resp.status(200).json(usuarios);
 
             });
         }
@@ -33,11 +33,11 @@ class UserController extends Database {
 
     cadastro() {
 
-        return function (req, resp) {
+        return (req, resp) => {
 
             let data = req.body;
 
-            User.findOne({login: req.body.login}, function (error, usuario) {
+            User.findOne({login: req.body.login}, (error, usuario) => {
 
                 if (usuario) {
 
@@ -56,9 +56,9 @@ class UserController extends Database {
 
                     const user = new User(data);
 
-                    user.save(function (error) {
+                    user.save((error) => {
                         if (error) {
-                            resp.send(error);
+                            resp.status(500).json(error);
 
                         } else {
 

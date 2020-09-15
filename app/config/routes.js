@@ -1,62 +1,35 @@
 const LoginController = require('../controllers/LoginController');
 const UserController = require('../controllers/UserController');
+const CityController = require('../controllers/CityController');
 const WeatherController = require('../controllers/WeatherController');
-const PlaylistController = require('../controllers/PlaylistController');
 
 const Token = require('../helpers/Token');
 
 const loginController = new LoginController();
 const userController = new UserController();
+const cityController = new CityController();
 const weatherController = new WeatherController();
-const playlistController = new PlaylistController();
 
 module.exports = (app) => {
 
-    /*################################################################*/
-
-    /* BEGIN - Rotas de Login e Autenticação */
-
+    const userRoutes = userController.routes();
     const loginRoutes = loginController.routes();
+    const weatherRoutes = weatherController.routes();
+    const cityRoutes = cityController.routes();
+
+    app.route(userRoutes.cadastro)
+        .post(userController.cadastro());
 
     app.route(loginRoutes.login)
         .post(loginController.login());
 
-    /* END - Rotas de Login e Autenticação */
-
-    /*################################################################*/
-
-    /*################################################################*/
-
-    /* BEGIN - Rotas de Cadastro de Usuário */
-
-    const userRoutes = userController.routes();
-
     app.route(userRoutes.listar)
         .get(/*Token.verifyJWT,*/ userController.listar());
-
-    app.route(userRoutes.cadastro)
-        .post(/*Token.verifyJWT,*/ userController.cadastro());
-
-    /* END - Rotas de Cadastro de Usuário */
-
-    /*################################################################*/
-
-    const weatherRoutes = weatherController.routes();
 
     app.route(weatherRoutes.clima)
         .get(/*Token.verifyJWT,*/ weatherController.clima());
 
-    /*################################################################*/
-
-    const playlistRoutes = playlistController.routes();
-
-    app.route(playlistRoutes.playlist)
-        .get(/*Token.verifyJWT,*/ async (req, resp) => {
-
-            let data = await playlistController.playlist();
-
-            resp.json(data);
-
-        });
+    app.route(cityRoutes.listar)
+        .get(/*Token.verifyJWT,*/ cityController.listar());
 
 };

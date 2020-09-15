@@ -31,7 +31,7 @@ class Token {
                 });
         }
 
-        jwt.verify(token, publicKey, {algorithm: [config.jwt.algorithm]}, function (err, decoded) {
+        jwt.verify(token, publicKey, {algorithm: [config.jwt.algorithm]}, (err, decoded) => {
 
             if (err) {
                 return resp.status(401).json(
@@ -43,41 +43,6 @@ class Token {
             }
 
             next();
-        });
-    }
-
-    static renewJWT(req, resp) {
-
-        const oldToken = req.body.token;
-
-        if (!oldToken) {
-            return resp.status(401).json(
-                {
-                    auth: false,
-                    message: 'Token não informado.'
-                });
-        }
-
-        jwt.verify(oldToken, publicKey, {algorithm: [config.jwt.algorithm]}, function (err, decoded) {
-
-            if (err) {
-                return resp.status(401).json(
-                    {
-                        auth: false,
-                        message: 'Token inválido.'
-                    });
-            }
-
-            req.userId = decoded.id;
-
-            const newToken = Token.generateJWT(decoded.id);
-
-            resp.status(200).json(
-                {
-                    auth: true,
-                    token: newToken,
-                    msg: 'Autenticação Válida!'
-                });
         });
     }
 }

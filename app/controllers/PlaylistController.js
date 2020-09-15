@@ -3,79 +3,84 @@ const config = require('../config/settings');
 
 class PlaylistController {
 
-    routes() {
-        return {
-            playlist: '/playlist'
-        };
-    }
+    spotifyApi;
 
-    static spotifyApi() {
+    constructor() {
 
         const spotifyWebApi = Middleware.spotifyWebApi();
 
-        const spotifyApi = new spotifyWebApi({
+        this.spotifyApi = new spotifyWebApi({
             clientId: config.apispotify.client_id,
             clientSecret: config.apispotify.client_secret
         });
-
-        return spotifyApi;
     }
 
-    async playlist() {
+    spotifyToken() {
 
-        const spotifyApi = PlaylistController.spotifyApi();
+        return new Promise((resolve, reject) => {
 
-        //pop, rock, classical
+            this.spotifyApi.clientCredentialsGrant()
+                .then(result => {
 
-        spotifyApi.clientCredentialsGrant()
-            .then(result => {
-                return result
+                    this.spotifyApi.setAccessToken(result.body['access_token']);
+                    resolve()
+
+                }).catch(error => {
+                reject(error)
             })
-            .then(result => {
+        })
+    }
 
-                const token = result.body['access_token'];
+    playlistForCategory(category, country) {
 
-                spotifyApi.setAccessToken(token);
+        return new Promise((resolve, reject) => {
 
-                return spotifyApi;
+            this.spotifyApi.getPlaylistsForCategory(category, {
+                country: country,
+                limit: 10,
+                offset: 0
+            }).then(result => {
+
+                resolve(result)
+
+            }).catch(error => {
+                reject(error)
             })
-            .then(async result => {
+        })
+    }
 
-                const getPlaylist = await spotifyApi.getPlaylistsForCategory('classical', {
-                    country: 'BR',
-                    limit: 10,
-                    offset: 0
-                })
+    dataPlaylist(data) {
 
-                return getPlaylist;
-            })
-            .then(result => {
+        return new Promise((resolve) => {
 
-                let index = Math.floor(Math.random() * 10);
+            let index = Math.floor(Math.random() * 10);
 
-                const spotify = result.body;
+            const spotify = data.body;
 
-                let playlist_id = spotify.playlists.items[index].id;
+            let playlist_id = spotify.playlists.items[index].id;
 
-                const dataPlaylist =
-                    {
-                        id: playlist_id,
-                        playlist: spotify.playlists.items[index].name,
-                        desc: spotify.playlists.items[index].description
-                    }
+            const dataPlaylist =
+                {
+                    id: playlist_id,
+                    playlist: spotify.playlists.items[index].name,
+                    desc: spotify.playlists.items[index].description
+                }
+            resolve(dataPlaylist);
+        })
+    }
 
-                return dataPlaylist;
+    getPlaylistTracks(dataPlaylist) {
 
-            })
-            .then(async resultPlaylist => {
+        return new Promise((resolve, reject) => {
 
-                const getPlaylistTracks = await spotifyApi.getPlaylistTracks(resultPlaylist.id, {
-                    fields: 'items'
-                })
+            this.spotifyApi.getPlaylistTracks(dataPlaylist.id, {
+                fields: 'items'
+
+            }).then(result => {
 
                 const tracksPlaylist = [];
 
-                const tracks = getPlaylistTracks.body.items;
+                const tracks = result.body.items;
 
                 Object.keys(tracks).map(objectKey => {
 
@@ -83,13 +88,43 @@ class PlaylistController {
 
                 })
 
+                const resultPlaylist = dataPlaylist;
+
                 resultPlaylist.tracks = tracksPlaylist;
 
-                console.log(resultPlaylist);
+                delete resultPlaylist.id;
 
-                return resultPlaylist;
+                resolve(resultPlaylist);
+
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    }
+
+    async playlist(category, country) { //pop, rock, classical
+
+        return Promise.resolve().then(() => {
+
+            return this.spotifyToken();
+
+        })
+            .then(() => {
+
+                return this.playlistForCategory(category, country);
 
             })
+            .then(result => {
+
+                return this.dataPlaylist(result);
+
+            })
+            .then(result => {
+
+                return this.getPlaylistTracks(result);
+
+            })
+            .then(result => result)
             .catch(error => error)
 
     }

@@ -21,13 +21,13 @@ class LoginController extends Database {
 
     login() {
 
-        return function (req, resp) {
+        return (req, resp) => {
 
             User.findOne(
                 {
                     login: req.body.login,
                     password: Crypto.cipher(req.body.password)
-                }, function (error, usuario) {
+                }, (error, usuario) => {
 
                     if (usuario) {
 
