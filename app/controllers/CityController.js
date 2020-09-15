@@ -5,7 +5,13 @@ class CityController extends Database {
 
     constructor() {
 
-        super();
+        try {
+
+            super();
+
+        } catch (e) {
+            console.log(e)
+        }
 
     }
 

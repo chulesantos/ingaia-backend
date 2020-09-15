@@ -4,9 +4,13 @@ const routes = require('./routes');
 
 const express = Middleware.express();
 
+const expressValidator = Middleware.expressValidator();
+
 const bodyParser = Middleware.bodyParser();
 
 const app = express();
+
+app.use(expressValidator());
 
 app.use(bodyParser.urlencoded({extended: false}));
 

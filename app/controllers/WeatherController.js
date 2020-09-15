@@ -20,7 +20,7 @@ class WeatherController {
 
             const request = Middleware.request();
 
-            const city = req.params.city;
+            let city = req.params.city;
 
             const uri = config.openweather.uri + '=' + city + '&units=' + config.openweather.units + '&APPID=' + config.openweather.api_key;
 
@@ -74,7 +74,7 @@ class WeatherController {
                         city: city,
                         temp: temp,
                         metrics: 'ºC',
-                        category: categoria,
+                        category: category,
                         suggested_playlist: playlist
                     });
             });

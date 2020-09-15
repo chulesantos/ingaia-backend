@@ -33,9 +33,20 @@ class UserController extends Database {
 
     cadastro() {
 
-        return (req, resp) => {
+        return ((req, resp) => {
 
             let data = req.body;
+
+            req.assert("login", "Login obrigatório. Min 5 e max 16 caracteres!").notEmpty().len(5, 16);
+            req.assert("password", "Password obrigatório. Min 5 e max 10 caracteres!").notEmpty().len(5, 10);
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+
+                resp.status(400).json(errors);
+                return;
+            }
 
             User.findOne({login: req.body.login}, (error, usuario) => {
 
@@ -70,7 +81,7 @@ class UserController extends Database {
                     });
                 }
             });
-        }
+        });
     }
 }
 

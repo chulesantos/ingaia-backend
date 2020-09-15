@@ -1,6 +1,7 @@
 const Middleware = require('../config/Middleware');
-
 const mongoose = Middleware.mongoose();
+
+
 const Schema = mongoose.Schema;
 
 const CitySchema = new Schema({

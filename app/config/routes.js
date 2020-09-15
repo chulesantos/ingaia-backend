@@ -32,4 +32,13 @@ module.exports = (app) => {
     app.route(cityRoutes.listar)
         .get(/*Token.verifyJWT,*/ cityController.listar());
 
+    app.route('/*')
+        .get((req, resp) => {
+            resp.status(404).json({
+
+                msg: 'Rota inválida!'
+
+            });
+        });
+
 };

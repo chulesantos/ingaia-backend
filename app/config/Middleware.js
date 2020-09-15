@@ -5,6 +5,11 @@ class Middleware {
         return express;
     }
 
+    static expressValidator() {
+        const expressValidator = require('express-validator');
+        return expressValidator;
+    }
+
     static bodyParser() {
         const bodyParser = require('body-parser');
         return bodyParser;
