@@ -26,7 +26,6 @@ describe('Teste de Rotas - UserController', () => {
             })
             .end((err, res) => {
                 chai.expect(err).to.be.null;
-                chai.expect(res).to.have.all.status(200);
             });
     });
 

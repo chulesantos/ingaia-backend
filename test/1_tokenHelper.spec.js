@@ -13,7 +13,7 @@ describe('Teste de Função - Token', () => {
 
         const id = 7848;
 
-        chai.expect(token.generateJWT(id)).to.be.a('string');
+        chai.expect(token.generateJWT(id)).to.be.a('string')
 
     });
 });
