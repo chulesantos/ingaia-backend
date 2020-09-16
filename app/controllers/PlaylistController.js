@@ -23,12 +23,12 @@ class PlaylistController {
                 .then(result => {
 
                     this.spotifyApi.setAccessToken(result.body['access_token']);
-                    resolve()
+                    resolve();
 
                 }).catch(error => {
-                reject(error)
-            })
-        })
+                reject(error);
+            });
+        });
     }
 
     playlistForCategory(category, country) {
@@ -41,12 +41,12 @@ class PlaylistController {
                 offset: 0
             }).then(result => {
 
-                resolve(result)
+                resolve(result);
 
             }).catch(error => {
-                reject(error)
-            })
-        })
+                reject(error);
+            });
+        });
     }
 
     dataPlaylist(data) {
@@ -64,9 +64,10 @@ class PlaylistController {
                     id: playlist_id,
                     playlist: spotify.playlists.items[index].name,
                     desc: spotify.playlists.items[index].description
-                }
+                };
+
             resolve(dataPlaylist);
-        })
+        });
     }
 
     getPlaylistTracks(dataPlaylist) {
@@ -86,7 +87,7 @@ class PlaylistController {
 
                     tracksPlaylist.push(tracks[objectKey].track.name);
 
-                })
+                });
 
                 const resultPlaylist = dataPlaylist;
 
@@ -97,9 +98,9 @@ class PlaylistController {
                 resolve(resultPlaylist);
 
             }).catch(error => {
-                reject(error)
-            })
-        })
+                reject(error);
+            });
+        });
     }
 
     async playlist(category, country) { //pop, rock, classical

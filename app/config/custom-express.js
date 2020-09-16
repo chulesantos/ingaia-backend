@@ -10,9 +10,9 @@ const bodyParser = Middleware.bodyParser();
 
 const app = express();
 
-app.use(expressValidator());
-
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(expressValidator());
 
 app.use(bodyParser.json());
 app.use(bodyParser.raw());

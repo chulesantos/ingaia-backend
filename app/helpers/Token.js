@@ -12,7 +12,7 @@ class Token {
     static generateJWT(id) {
 
         const token = jwt.sign({id}, privateKey, {
-            expiresIn: config.jwt.expiresIn, // 8min
+            expiresIn: config.jwt.expiresIn, // 10min
             algorithm: config.jwt.algorithm //SHA-256 hash signature
         });
 

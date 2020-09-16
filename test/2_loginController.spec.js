@@ -12,7 +12,6 @@ const loginSchema =
         auth: auth => auth,
         msg: msg => msg,
         token: token => token
-
     };
 
 describe('Teste de Rotas - LoginController', () => {
@@ -25,10 +24,9 @@ describe('Teste de Rotas - LoginController', () => {
                 password: '123456789'
             })
             .end((err, res) => {
-
                 chai.expect(err).to.be.null;
                 chai.expect(res).to.have.status(200);
                 chai.expect(res.body).to.containSubset(loginSchema);
             });
-    })
-})
+    });
+});

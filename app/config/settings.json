@@ -3,7 +3,7 @@
     "development": "mongodb://mongodb:27017/development"
   },
   "jwt": {
-    "expiresIn": 480,
+    "expiresIn": 600,
     "algorithm": "RS256"
   },
   "crypto": {

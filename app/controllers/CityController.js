@@ -5,14 +5,7 @@ class CityController extends Database {
 
     constructor() {
 
-        try {
-
-            super();
-
-        } catch (e) {
-            console.log(e)
-        }
-
+        super();
     }
 
     routes() {
@@ -43,7 +36,6 @@ class CityController extends Database {
             if (error)
                 resp.send(error);
         });
-
     }
 }
 

@@ -7,7 +7,6 @@ class UserController extends Database {
     constructor() {
 
         super();
-
     }
 
     routes() {

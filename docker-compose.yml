@@ -9,19 +9,60 @@ services:
 
   mongodb:
     image: mongo
-    container_name: mongo-teste
+    container_name: mongo-ingaia
     networks:
       - ingaia-backend
 
-  node:
+  node1:
     build:
-      dockerfile: ./node.dockerfile
+      dockerfile: ./docker/node.dockerfile
       context: .
-    image: chulesantos/node-teste
-    container_name: node-teste
+    image: chulesantos/node-ingaia
+    container_name: node-ingaia-1
     ports:
       - "3000"
     networks:
       - ingaia-backend
     depends_on:
       - "mongodb"
+
+  node2:
+    build:
+      dockerfile: ./docker/node.dockerfile
+      context: .
+    image: chulesantos/node-ingaia
+    container_name: node-ingaia-2
+    ports:
+      - "3000"
+    networks:
+      - ingaia-backend
+    depends_on:
+      - "mongodb"
+
+  node3:
+    build:
+      dockerfile: ./docker/node.dockerfile
+      context: .
+    image: chulesantos/node-ingaia
+    container_name: node-ingaia-3
+    ports:
+      - "3000"
+    networks:
+      - ingaia-backend
+    depends_on:
+      - "mongodb"
+
+  nginx:
+    build:
+      dockerfile: ./docker/nginx.dockerfile
+      context: .
+    image: chulesantos/nginx-ingaia
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - ingaia-backend
+    depends_on:
+      - "node1"
+      - "node2"
+      - "node3"

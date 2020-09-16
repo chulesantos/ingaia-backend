@@ -10,7 +10,6 @@ class LoginController extends Database {
     constructor() {
 
         super();
-
     }
 
     routes() {
