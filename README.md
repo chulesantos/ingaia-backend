@@ -24,11 +24,11 @@ O Serviço foi desenvolvido em [NodeJs](https://nodejs.org/en/) com a utilizaç�
 
 O padrão utilizado foi o [MVC](https://www.portalgsti.com.br/2017/08/padrao-mvc-arquitetura-model-view-controller.html), conforme boas práticas de programação Orientado a Objetos.
 
-Alguns conceitos de estruturação de pastas, arquivos e rotas, foi aplicado conforme algumas orientações adquiridas com cursos realizados do [Alura Cursos](https://www.alura.com.br).
+Alguns conceitos de estruturação de pastas, arquivos e rotas, foram aplicados conforme algumas orientações adquiridas em cursos realizados no [Alura Cursos](https://www.alura.com.br).
 
-A orquestração de containers e implementação do serviço [Nginx](https://www.nginx.com/) para Load Balancing, foi utilizado conforme conhecimento adquirido no curso: [Docker: Criando containers sem dor de cabeça](https://www.alura.com.br/curso-online-docker-e-docker-compose).
+A orquestração de containers e implementação do serviço [Nginx](https://www.nginx.com/) para Load Balancing, foi utilizada conforme conhecimento adquirido no curso: [Docker: Criando containers sem dor de cabeça](https://www.alura.com.br/curso-online-docker-e-docker-compose).
 
-#### Tecnologias Utilizadas:
+#### Tecnologias Utilizadas
 
 - [Docker Containers](https://www.docker.com/)
 - [Nginx](https://www.nginx.com/)
@@ -37,7 +37,7 @@ A orquestração de containers e implementação do serviço [Nginx](https://www
 
 ## INSTALAÇÃO
 
-#### Pré-requisitos:
+#### Pré-requisitos
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
@@ -103,7 +103,7 @@ Successfully built d0394fab1d30
 >>>
 ````
 
-Assim que o build estiver concluído, execute o comando para iniciar os serviços.
+Assim que o build estiver concluído, execute o comando para subir os serviços.
 
 ````
 $ docker-compose up -d
