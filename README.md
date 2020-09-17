@@ -18,7 +18,7 @@ Um estudo organizado por um grupo de pesquisadores desocupados demonstrou que as
 
 ## ARQUITETURA
 
-##### Descrição
+#### Descrição
 
 O Serviço foi desenvolvido em [NodeJs](https://nodejs.org/en/) com a utilização de algumas Middlewares, como [express](https://www.npmjs.com/package/express) e [request](https://www.npmjs.com/package/request) que encapsulam uma REST API.
 
@@ -28,7 +28,7 @@ Alguns conceitos de estruturação de pastas, arquivos e rotas, foi aplicado con
 
 A orquestração de containers e implementação do serviço [Nginx](https://www.nginx.com/) para Load Balancing, foi utilizado conforme conhecimento adquirido no curso: [Docker: Criando containers sem dor de cabeça](https://www.alura.com.br/curso-online-docker-e-docker-compose).
 
-##### Tecnologias Utilizadas
+#### Tecnologias Utilizadas:
 
 - [Docker Containers](https://www.docker.com/)
 - [Nginx](https://www.nginx.com/)
@@ -125,9 +125,7 @@ localhost:80
 
 ### ENDPOINTS
 
-Acesse o Serviço Oline:
-
-[REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
+Acesse o Serviço Online: [REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
 
 #### MÉTODOS
 
