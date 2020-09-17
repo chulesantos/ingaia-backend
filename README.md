@@ -11,7 +11,7 @@
 
 Este documento tem como objetivo definir e especificar os requisitos de funcionamento da API REST de teste de Desenvolvedor Back-End (Suporte N2) que será desenvolvida para a empresa I-VALUE TECNOLOGIA S.A., localizada em Av. José de Souza Campos, 1549 - Cambuí, Campinas - SP, 13025-320.
 
-Formalmente, podemos definir que o documento contém: “Os serviços e funcionalidades que a API provê”. Informações sobre a arquitetura da aplicação, bem como restrições.
+Formalmente, podemos definir que o documento contém: “Os serviços e funcionalidades que a API provê”, informações sobre a arquitetura da aplicação, bem como restrições.
 
 ### VISÃO GERAL DO SISTEMA PROPOSTO
 
@@ -23,7 +23,7 @@ Um estudo organizado por um grupo de pesquisadores desocupados demonstrou que as
 
 O Serviço foi desenvolvido em [NodeJs](https://nodejs.org/en/) com a utilização de algumas Middlewares, como [express](https://www.npmjs.com/package/express) e [request](https://www.npmjs.com/package/request) que encapsulam uma REST API.
 
-O padrão utilizado foi o [MVC](https://www.portalgsti.com.br/2017/08/padrao-mvc-arquitetura-model-view-controller.html), conforme boas práticas de programação Orientado a Objetos.
+O padrão utilizado foi o [MVC](https://www.portalgsti.com.br/2017/08/padrao-mvc-arquitetura-model-view-controller.html), conforme boas práticas de programação orientada a objetos.
 
 Alguns conceitos de estruturação de pastas, arquivos e rotas, foram aplicados conforme algumas orientações adquiridas em cursos realizados no [Alura Cursos](https://www.alura.com.br).
 
@@ -46,15 +46,16 @@ A orquestração de containers e implementação do serviço [Nginx](https://www
 
 Será necessário navegar até a pasta raiz do projeto.
 ````
+/pasta/local/`
 __ingaia-backed
-___app
-___docker
-___test
-... /*outros arquivos*/
-___docker-compose.yml
+|___app
+|___docker
+|___test
+|... /*outros arquivos*/
+|___docker-compose.yml
 ````
 
-Executar o build do projeto com o comando a seguir:
+Executar a build do projeto com o comando a seguir:
 
 ````
 $ docker-compose build
@@ -104,7 +105,7 @@ Successfully built d0394fab1d30
 >>>
 ````
 
-Assim que o build estiver concluído, execute o comando para subir os serviços.
+Assim que a build estiver concluído, execute o comando para subir os serviços.
 
 ````
 $ docker-compose up -d
@@ -142,7 +143,7 @@ Acesse o Serviço Online: [REST API Online - Amazon AWS EC2](http://ec2-18-217-1
 
 #### AUTENTICAÇÃO
 
-As rotas GET necessitam de autenticação via [JWT](https://jwt.io/), no cabeçalho da requisição deverá ser informado o Token de acesso, logo, será necessário efetuar login.
+As rotas GET necessitam de autenticação via [JWT](https://jwt.io/). No cabeçalho da requisição deverá ser informado o Token de acesso, logo, será necessário efetuar login.
 
 ```javascript
 header('Authorization') = "MEU-TOKEN";
@@ -205,21 +206,20 @@ Output:
 
 ### TESTES
 
-- Integração,
-- Função,
+- Integração
+- Função
 - Promises
 
 Pasta Raiz do projeto dentro do container Node:
 
-/var/www
-
-````
+```
+/var/www/`
 __ingaia-backed
-___app
-___docker
-___test
-... /*outros arquivos*/
-___docker-compose.yml
+|___app
+|___docker
+|___test
+|... /*outros arquivos*/
+|___docker-compose.yml
 ````
 
 Comando:
@@ -275,8 +275,8 @@ Output:
 
 ##### Container com [MongoDB](https://www.mongodb.com/)
 - Não possui usuário root, segurança não aplicada.
-- Não possui persistência, assim que a instância é desligada, os dados são perdidos.
-- OBS: Utilizado apenas para testar o serviço.
+- Não possui persistência. Assim que a instância é desligada, os dados são perdidos.
+OBS: utilizado apenas para testar o serviço.
 
 ##### Testes com [Chai](https://www.npmjs.com/package/chai) e [Mocha](https://www.npmjs.com/package/mocha)
 - Alguns testes não serão realizados se o Banco de Dados estiver desligado, levando em consideração o teste de rotas com acesso ao mesmo.
