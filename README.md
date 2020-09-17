@@ -5,6 +5,7 @@
 * [Instalação](#instalação)
 * [Endpoints](#endpoints)
 * [Testes](#testes)
+* [Restrições](#restrições)
 
 ## INTRODUÇÃO
 
@@ -270,3 +271,12 @@ Output:
 
 ````
 
+## RESTRIÇÕES
+
+##### Container com [MongoDB](https://www.mongodb.com/)
+- Não possui usuário root, segurança não aplicada.
+- Não possui persistência, assim que a instância é desligada, os dados são perdidos.
+- OBS: Utilizado apenas para testar o serviço.
+
+##### Testes com [Chai](https://www.npmjs.com/package/chai) e [Mocha](https://www.npmjs.com/package/mocha)
+- Alguns testes não serão realizados se o Banco de Dados estiver desligado, levando em consideração o teste de rotas com acesso ao mesmo.
