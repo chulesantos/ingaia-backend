@@ -29,7 +29,7 @@ module.exports = (app) => {
         .get(verifyJWT, userController.getUsers());
 
     app.route(weatherRoutes.weather)
-        .get(/*verifyJWT, */weatherController.weather());
+        .get(verifyJWT, weatherController.weather());
 
     app.route(cityRoutes.getCities)
         .get(verifyJWT, cityController.getSearchCities());
