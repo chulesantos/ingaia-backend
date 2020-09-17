@@ -46,7 +46,7 @@ A orquestração de containers e implementação do serviço [Nginx](https://www
 
 Será necessário navegar até a pasta raiz do projeto.
 ````
-/pasta/local/`
+/pasta/local/
 __ingaia-backed
 |___app
 |___docker
@@ -213,7 +213,7 @@ Output:
 Pasta raiz do projeto dentro do container Node:
 
 ```
-/var/www/`
+/var/www/
 __ingaia-backed
 |___app
 |___docker
