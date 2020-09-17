@@ -26,8 +26,6 @@ class WeatherController {
 
                 city = city.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/([^\w]+|\s+)/g, ' ');
 
-                console.log(city);
-
                 const uri = config.openweather.uri + '=' + city + '&units=' + config.openweather.units + '&APPID=' + config.openweather.api_key;
 
                 request(uri, async (error, response, body) => {
