@@ -105,7 +105,7 @@ Successfully built d0394fab1d30
 >>>
 ````
 
-Assim que a build estiver concluído, execute o comando para subir os serviços.
+Assim que a build estiver concluída, execute o comando para subir os serviços.
 
 ````
 $ docker-compose up -d
@@ -127,23 +127,23 @@ localhost:80
 
 ### ENDPOINTS
 
-Acesse o Serviço Online: [REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
+Acesse o serviço online: [REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com/weather/Vitoria)
 
 #### MÉTODOS
 
 ###### POST
-- /user/create => Cadastrar um novo usuário.
+- /user/create => Cadastrar um novo usuário,
 - /user/login => Efetuar autenticação de usuário.
 
 ###### GET
-- /weather/:city => Consultar clima e playlist recomendada de uma cidade;
-- /user/list => Listar todos os usuários cadastrados.
+- /weather/:city => Consultar clima e playlist recomendada de uma cidade,
+- /user/list => Listar todos os usuários cadastrados,
 - /cities/search => Listar as cidades consultadas.
 
 
 #### AUTENTICAÇÃO
 
-As rotas GET necessitam de autenticação via [JWT](https://jwt.io/). No cabeçalho da requisição deverá ser informado o Token de acesso, logo, será necessário efetuar login.
+As rotas GET necessitam de autenticação via [JWT](https://jwt.io/). No cabeçalho da requisição deverá ser informado o token de acesso, logo, será necessário efetuar login.
 
 ```javascript
 header('Authorization') = "MEU-TOKEN";
@@ -180,7 +180,7 @@ Para efetuar o cadastro de um novo usuário:
 
 #### PLAYLIST RECOMENDADA PELO CLIMA ATUAL DA CIDADE
 
-http://localhost/weather/Vitória
+host/weather/Vitória (Token necessário).
 
 Output: 
 
@@ -210,7 +210,7 @@ Output:
 - Função
 - Promises
 
-Pasta Raiz do projeto dentro do container Node:
+Pasta raiz do projeto dentro do container Node:
 
 ```
 /var/www/`
@@ -276,7 +276,7 @@ Output:
 ##### Container com [MongoDB](https://www.mongodb.com/)
 - Não possui usuário root, segurança não aplicada.
 - Não possui persistência. Assim que a instância é desligada, os dados são perdidos.
-OBS: utilizado apenas para testar o serviço.
+###### Obs: Utilizado apenas para testar o serviço.
 
 ##### Testes com [Chai](https://www.npmjs.com/package/chai) e [Mocha](https://www.npmjs.com/package/mocha)
-- Alguns testes não serão realizados se o Banco de Dados estiver desligado, levando em consideração o teste de rotas com acesso ao mesmo.
+- Alguns testes não serão realizados se o banco de dados estiver desligado, levando em consideração o teste de rotas com acesso ao mesmo.
