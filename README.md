@@ -16,9 +16,9 @@ Formalmente, podemos definir que o documento contém: “Os serviços e funciona
 
 Um estudo organizado por um grupo de pesquisadores desocupados demonstrou que as pessoas tendem a preferir diferentes gêneros musicais de acordo com a temperatura ambiente. Baseado nesta incrível descoberta, esperamos um serviço revolucionário que irá sugerir músicas ao usuário de acordo com a temperatura atual da cidade dele.
 
-##ARQUITETURA
+## ARQUITETURA
 
-#####Descrição
+##### Descrição
 
 O Serviço foi desenvolvido em [NodeJs](https://nodejs.org/en/) com a utilização de algumas Middlewares, como [express](https://www.npmjs.com/package/express) e [request](https://www.npmjs.com/package/request) que encapsulam uma REST API.
 
@@ -28,14 +28,14 @@ Alguns conceitos de estruturação de pastas, arquivos e rotas, foi aplicado con
 
 A orquestração de containers e implementação do serviço [Nginx](https://www.nginx.com/) para Load Balancing, foi utilizado conforme conhecimento adquirido no curso: [Docker: Criando containers sem dor de cabeça](https://www.alura.com.br/curso-online-docker-e-docker-compose).
 
-#####Tecnologias Utilizadas
+##### Tecnologias Utilizadas
 
 - [Docker Containers](https://www.docker.com/)
 - [Nginx](https://www.nginx.com/)
 - [NodeJs](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.com/)
 
-##INSTALAÇÃO
+## INSTALAÇÃO
 
 Será necessário navegar até a pasta raiz do projeto.
 ````
@@ -117,23 +117,23 @@ A API localhost é servida pela porta 80.
 
 localhost:80
 
-###ENDPOINTS
+### ENDPOINTS
 
-[REST API Online - Amazon AWS EC2](ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
+[REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
 
-####MÉTODOS
+#### MÉTODOS
 
-######POST
+###### POST
 - /user/create => Cadastrar um novo usuário.
 - /user/login => Efetuar autenticação de usuário.
 
-######GET
+###### GET
 - /weather/:city => Consultar clima e playlist recomendada de uma cidade;
 - /user/list => Listar todos os usuários cadastrados.
 - /cities/search => Listar as cidades consultadas.
 
 
-####AUTENTICAÇÃO
+#### AUTENTICAÇÃO
 
 As rotas GET necessitam de autenticação via [JWT](https://jwt.io/), no cabeçalho da requisição deverá ser informado o Token de acesso, logo, será necessário efetuar login.
 
@@ -170,7 +170,7 @@ Para efetuar o cadastro de um novo usuário:
 }
 ````
 
-####PLAYLIST RECOMENDADA PELO CLIMA ATUAL DA CIDADE
+#### PLAYLIST RECOMENDADA PELO CLIMA ATUAL DA CIDADE
 
 http://localhost/weather/Vitória
 
@@ -196,13 +196,15 @@ Output:
 
 ```
 
-###TESTES
+### TESTES
 
 - Integração,
 - Função,
 - Promises
 
-Pasta Raiz do projeto:
+Pasta Raiz do projeto dentro do container Node:
+
+/var/www
 
 ````
 __ingaia-backed
