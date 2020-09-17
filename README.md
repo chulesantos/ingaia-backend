@@ -119,6 +119,8 @@ localhost:80
 
 ### ENDPOINTS
 
+Acesse o Serviço Oline:
+
 [REST API Online - Amazon AWS EC2](http://ec2-18-217-143-57.us-east-2.compute.amazonaws.com)
 
 #### MÉTODOS
