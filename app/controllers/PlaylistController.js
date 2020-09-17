@@ -103,7 +103,7 @@ class PlaylistController {
         });
     }
 
-    async playlist(category, country) { //pop, rock, classical
+    async getPlaylistFromWeather(category, country) { //pop, rock, classical
 
         return Promise.resolve().then(() => {
 

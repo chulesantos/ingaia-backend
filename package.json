@@ -4,7 +4,7 @@
   "description": "Teste de BackEnd - Ingaia",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "mocha test --exit"
   },
   "author": "chulesantos",
@@ -22,7 +22,6 @@
     "mocha": "^8.1.3",
     "mongodb": "3.5.6",
     "mongoose": "5.9.9",
-    "nodemon": "2.0.2",
     "request": "2.88.2",
     "spotify-web-api-node": "4.0.0"
   }

@@ -18,5 +18,17 @@
   "apispotify": {
     "client_id": "cde0e58bea6048ec8690caac1941ef64",
     "client_secret": "98aea884fa884a378751b1864507998c"
+  },
+  "alerts": {
+    "search_city": "Cidade não localizada, verifique o nome informado!",
+    "error": "Erro inesperado - Verifique com o Administrador!",
+    "user_create_success": "Usuario Cadastrado com Sucesso!",
+    "user_create_error": "Login já registrado, por gentileza utilizar um diferente!",
+    "login_required": "Login obrigatório. Min 5 e max 16 caracteres!",
+    "password_required": "Password obrigatório. Min 5 e max 10 caracteres!",
+    "login_sucess": "Autenticação Válida! - Bem Vindo!",
+    "login_error": "Autenticação Inválida, por gentileza verifique os seus dados!",
+    "token_null": "Token não informado, por gentileza efetuar login!",
+    "token_false": "Token inválido, por gentileza disponibilizar um novo!"
   }
 }

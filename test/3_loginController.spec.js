@@ -16,9 +16,9 @@ const loginSchema =
 
 describe('Teste de Rotas - LoginController', () => {
 
-    it('/login - POST', () => {
+    it('/user/login - POST', () => {
         chai.request(express)
-            .post('/login')
+            .post('/user/login')
             .send({
                 login: 'user-teste',
                 password: '123456789'

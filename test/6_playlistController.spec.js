@@ -17,25 +17,25 @@ const spotifyApiSchema =
         }
     };
 
-const playlist = new PlaylistController();
+const apiSpotify = new PlaylistController();
 
 describe('Teste de Promises - PlaylistController', () => {
 
     it('construtor', () => {
 
-        chai.expect(playlist).to.containSubset(spotifyApiSchema);
+        chai.expect(apiSpotify).to.containSubset(spotifyApiSchema);
 
     });
 
     it('spotifyToken', () => {
 
-        chai.expect(playlist.spotifyToken()).to.be.a('promise');
+        chai.expect(apiSpotify.spotifyToken()).to.be.a('promise');
 
     });
 
     it('playlistForCategory', () => {
 
-        chai.expect(playlist.playlistForCategory('Vitoria', 'pop')).to.be.a('promise');
+        chai.expect(apiSpotify.playlistForCategory('Vitoria', 'pop')).to.be.a('promise');
 
     });
 
@@ -48,13 +48,13 @@ describe('Teste de Promises - PlaylistController', () => {
                 desc: 'These songs rocked the 80s. Cover: AC/DC.'
             };
 
-        chai.expect(playlist.getPlaylistTracks(dataPlaylist)).to.be.a('promise');
+        chai.expect(apiSpotify.getPlaylistTracks(dataPlaylist)).to.be.a('promise');
 
     });
 
-    it('playlist', () => {
+    it('getPlaylistFromWeather', () => {
 
-        chai.expect(playlist.playlist('pop', 'BR')).to.be.a('promise');
+        chai.expect(apiSpotify.getPlaylistFromWeather('pop', 'BR')).to.be.a('promise');
 
     });
 });

@@ -1,5 +1,6 @@
 const Database = require('../config/Database');
 const City = require('../models/City');
+const config = require('../config/settings.json');
 
 class CityController extends Database {
 
@@ -10,32 +11,43 @@ class CityController extends Database {
 
     routes() {
         return {
-            listar: '/city/listar'
+            getCities: '/cities/search'
         };
     }
 
-    listar() {
+    getSearchCities() {
 
-        return (error, resp) => {
+        try {
 
-            City.find((error, citys) => {
-                if (error)
-                    resp.send(error);
+            return (error, resp) => {
 
-                resp.status(200).json(citys);
+                City.find((error, citys) => {
+                    if (error)
+                        console.log(error);
 
-            });
+                    resp.status(200).json(citys);
+
+                });
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 
-    cadastro(data) {
+    registerNewSearch(data) {
 
-        const city = new City(data);
+        try {
 
-        city.save((error) => {
-            if (error)
-                resp.send(error);
-        });
+            const city = new City(data);
+
+            city.save((error) => {
+                if (error)
+                    console.log(error);
+            });
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
 

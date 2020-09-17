@@ -1,6 +1,7 @@
 const Database = require('../config/Database');
 const Crypto = require('../helpers/Crypto');
 const User = require('../models/User');
+const config = require('../config/settings.json');
 
 class UserController extends Database {
 
@@ -11,76 +12,91 @@ class UserController extends Database {
 
     routes() {
         return {
-            cadastro: '/usuario/cadastro',
-            listar: '/usuario/listar'
+            create: '/user/create',
+            getUsers: '/user/list'
         };
     }
 
-    listar() {
+    getUsers() {
 
-        return (error, resp) => {
+        try {
 
-            User.find((error, usuarios) => {
-                if (error)
-                    resp.status(500).json(error);
+            return (error, resp) => {
 
-                resp.status(200).json(usuarios);
+                User.find((error, usuarios) => {
+                    if (error)
+                        console.log(error);
 
-            });
+                    resp.status(200).json(usuarios);
+
+                });
+            }
+        } catch (err) {
+            console.log(err);
         }
+
     }
 
-    cadastro() {
+    createNewUser() {
 
-        return ((req, resp) => {
+        try {
 
-            let data = req.body;
+            return ((req, resp) => {
 
-            req.assert("login", "Login obrigatório. Min 5 e max 16 caracteres!").notEmpty().len(5, 16);
-            req.assert("password", "Password obrigatório. Min 5 e max 10 caracteres!").notEmpty().len(5, 10);
+                let data = req.body;
 
-            const errors = req.validationErrors();
+                req.assert("login", config.alerts.login_required).notEmpty().len(5, 16);
+                req.assert("password", config.alerts.password_required).notEmpty().len(5, 10);
 
-            if (errors) {
+                const errors = req.validationErrors();
 
-                resp.status(400).json(errors);
-                return;
-            }
+                if (errors) {
+                    resp.status(400).json(errors);
+                    return false;
+                }
 
-            User.findOne({login: req.body.login}, (error, usuario) => {
+                User.findOne({login: req.body.login}, (error, usuario) => {
 
-                if (usuario) {
+                    if (error) {
+                        resp.status(500).json(error);
+                        return false;
+                    }
 
-                    resp.status(401).json(
-                        {
-                            msg: 'Login já cadastrado!'
+                    if (usuario) {
+
+                        resp.status(401).json(
+                            {
+                                msg: config.alerts.user_create_error
+                            });
+
+                    } else {
+
+                        data = Object.assign(data, {
+
+                            password: Crypto.cipher(data.password)
+
                         });
 
-                } else {
+                        const user = new User(data);
 
-                    data = Object.assign(data, {
+                        user.save((error) => {
+                            if (error) {
+                                resp.status(500).json(error);
 
-                        password: Crypto.cipher(data.password)
+                            } else {
 
-                    });
-
-                    const user = new User(data);
-
-                    user.save((error) => {
-                        if (error) {
-                            resp.status(500).json(error);
-
-                        } else {
-
-                            resp.status(200).json(
-                                {
-                                    msg: 'Usuario Cadastrado com Sucesso!'
-                                });
-                        }
-                    });
-                }
+                                resp.status(200).json(
+                                    {
+                                        msg: config.alerts.user_create_success
+                                    });
+                            }
+                        });
+                    }
+                });
             });
-        });
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
 

@@ -2,6 +2,7 @@ const Database = require('../config/Database');
 const Middleware = require('../config/Middleware');
 const Token = require('../helpers/Token');
 const Crypto = require('../helpers/Crypto');
+const config = require('../config/settings.json');
 
 const User = require('../models/User');
 
@@ -14,45 +15,55 @@ class LoginController extends Database {
 
     routes() {
         return {
-            login: '/login'
+            login: '/user/login'
         };
     }
 
     login() {
 
-        return (req, resp) => {
+        try {
 
-            User.findOne(
-                {
-                    login: req.body.login,
-                    password: Crypto.cipher(req.body.password)
-                }, (error, usuario) => {
+            return (req, resp) => {
 
-                    if (usuario) {
+                User.findOne(
+                    {
+                        login: req.body.login,
+                        password: Crypto.cipher(req.body.password)
+                    }, (error, usuario) => {
 
-                        const fileToString = Middleware.fs();
+                        if (error) {
+                            resp.status(500).json(error);
+                            return false;
+                        }
 
-                        const id = usuario._id
+                        if (usuario) {
 
-                        const token = Token.generateJWT(id);
+                            const fileToString = Middleware.fs();
 
-                        resp.status(200).json(
-                            {
-                                auth: true,
-                                token: token,
-                                msg: 'Autenticação Válida!'
-                            });
+                            const id = usuario._id;
 
-                    } else {
+                            const token = Token.generateJWT(id);
 
-                        resp.status(401).json(
-                            {
-                                auth: false,
-                                token: null,
-                                msg: 'Autenticação Inválida!'
-                            });
-                    }
-                });
+                            resp.status(200).json(
+                                {
+                                    auth: true,
+                                    token: token,
+                                    msg: config.alerts.login_sucess
+                                });
+
+                        } else {
+
+                            resp.status(401).json(
+                                {
+                                    auth: false,
+                                    token: null,
+                                    msg: config.alerts.login_error
+                                });
+                        }
+                    });
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 }

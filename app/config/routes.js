@@ -17,28 +17,28 @@ module.exports = (app) => {
     const weatherRoutes = weatherController.routes();
     const cityRoutes = cityController.routes();
 
-    app.route(userRoutes.cadastro)
-        .post(userController.cadastro());
+    const verifyJWT = Token.verifyJWT;
+
+    app.route(userRoutes.create)
+        .post(userController.createNewUser());
 
     app.route(loginRoutes.login)
         .post(loginController.login());
 
-    app.route(userRoutes.listar)
-        .get(/*Token.verifyJWT,*/ userController.listar());
+    app.route(userRoutes.getUsers)
+        .get(verifyJWT, userController.getUsers());
 
-    app.route(weatherRoutes.clima)
-        .get(/*Token.verifyJWT,*/ weatherController.clima());
+    app.route(weatherRoutes.weather)
+        .get(/*verifyJWT, */weatherController.weather());
 
-    app.route(cityRoutes.listar)
-        .get(/*Token.verifyJWT,*/ cityController.listar());
+    app.route(cityRoutes.getCities)
+        .get(verifyJWT, cityController.getSearchCities());
 
     app.route('/*')
         .get((req, resp) => {
-            resp.status(404).json({
-
-                msg: 'Rota inválida!'
-
-            });
+            resp.status(404).json(
+                {
+                    msg: 'Rota inválida!'
+                });
         });
-
 };

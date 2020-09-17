@@ -27,7 +27,7 @@ class Token {
             return resp.status(401).json(
                 {
                     auth: false,
-                    message: 'Token não informado.'
+                    msg: config.alerts.token_null
                 });
         }
 
@@ -37,7 +37,7 @@ class Token {
                 return resp.status(401).json(
                     {
                         auth: false,
-                        message: 'Token inválido.'
+                        msg: config.alerts.login_error
                     }
                 );
             }
