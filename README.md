@@ -13,7 +13,7 @@ Este documento tem como objetivo definir e especificar os requisitos de funciona
 
 Formalmente, podemos definir que o documento contém: “Os serviços e funcionalidades que a API provê”, informações sobre a arquitetura da aplicação, bem como restrições.
 
-### VISÃO GERAL DO SISTEMA PROPOSTO
+#### VISÃO GERAL DO SISTEMA PROPOSTO
 
 Um estudo organizado por um grupo de pesquisadores desocupados demonstrou que as pessoas tendem a preferir diferentes gêneros musicais de acordo com a temperatura ambiente. Baseado nesta incrível descoberta, esperamos um serviço revolucionário que irá sugerir músicas ao usuário de acordo com a temperatura atual da cidade dele.
 
@@ -47,7 +47,7 @@ A orquestração de containers e implementação do serviço [Nginx](https://www
 Será necessário navegar até a pasta raiz do projeto.
 ````
 /pasta/local/
-__ingaia-backed
+__ingaia-backend
 |___app
 |___docker
 |___test
@@ -214,7 +214,7 @@ Pasta raiz do projeto dentro do container Node:
 
 ```
 /var/www/
-__ingaia-backed
+__ingaia-backend
 |___app
 |___docker
 |___test
