@@ -6,7 +6,7 @@
 * [Endpoints](#endpoints)
 * [Testes](#testes)
 
-### INTRODUÇÃO
+## INTRODUÇÃO
 
 Este documento tem como objetivo definir e especificar os requisitos de funcionamento da API REST de teste de Desenvolvedor Back-End (Suporte N2) que será desenvolvida para a empresa I-VALUE TECNOLOGIA S.A., localizada em Av. José de Souza Campos, 1549 - Cambuí, Campinas - SP, 13025-320.
 
@@ -36,6 +36,12 @@ A orquestração de containers e implementação do serviço [Nginx](https://www
 - [MongoDB](https://www.mongodb.com/)
 
 ## INSTALAÇÃO
+
+#### Pré-requisitos:
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
 
 Será necessário navegar até a pasta raiz do projeto.
 ````
